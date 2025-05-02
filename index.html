@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Waktu Sholat</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 10px;
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        th {
+            background-color: #212121;
+            color: #00e676;
+        }
+        tr:nth-child(even) {
+            background-color: #1e1e1e;
+        }
+        tr:nth-child(odd) {
+            background-color: #2c2c2c;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #1f1f1f;
+            color: #888;
+        }
+        select {
+            padding: 10px;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Jadwal Waktu Sholat</h1>
+    <p>Disusun oleh Kelompok E</p>
+</header>
+
+<div class="container">
+    <h2>Pilih Kota</h2>
+    <select id="kotaSelector" onchange="updateJadwal()">
+        <option value="jakarta">Jakarta</option>
+        <option value="tangerang">Tangerang</option>
+        <option value="makassar">Makassar</option>
+        <option value="medan">Medan</option>
+        <option value="sukabumi">Sukabumi</option>
+        <option value="banjarmasin">Banjar Masin</option>
+        <option value="jawatengah">Jawa Tengah</option>
+        <option value="jawatimur">Jawa Timur</option>
+        <option value="jambi">Jambi</option>
+    </select>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal</th>
+                <th>Imsak</th>
+                <th>Subuh</th>
+                <th>Terbit Matahari</th>
+                <th>Dzuhur</th>
+                <th>Ashar</th>
+                <th>Maghrib</th>
+                <th>Isya</th>
+                <th>Arah Kiblat (Derajat)</th>
+            </tr>
+        </thead>
+        <tbody id="jadwalKota">
+            <!-- Waktu sholat untuk kota yang dipilih akan ditampilkan di sini -->
+        </tbody>
+    </table>
+</div>
+
+<footer>
+    <!-- Footer kosong tanpa copyright -->
+</footer>
+
+<script>
+    // Data waktu sholat dan koordinat kiblat untuk berbagai kota
+    const jadwalSholat = {
+        jakarta: ['04:20', '04:30', '06:00', '12:00', '15:30', '18:00', '19:15', 100],
+        tangerang: ['04:21', '04:31', '06:01', '12:01', '15:31', '18:01', '19:16', 102],
+        makassar: ['04:30', '04:40', '06:10', '12:10', '15:40', '18:10', '19:30', 110],
+        medan: ['04:35', '04:45', '06:15', '12:15', '15:45', '18:15', '19:35', 98],
+        sukabumi: ['04:25', '04:35', '06:05', '12:05', '15:35', '18:05', '19:25', 104],
+        banjarmasin: ['04:40', '04:50', '06:20', '12:20', '15:50', '18:20', '19:40', 108],
+        jawatengah: ['04:45', '04:55', '06:25', '12:25', '15:55', '18:25', '19:45', 107],
+        jawatimur: ['04:50', '05:00', '06:30', '12:30', '16:00', '18:30', '19:50', 106],
+        jambi: ['04:45', '04:55', '06:25', '12:25', '15:55', '18:25', '19:45', 99],
+    };
+
+    function updateJadwal() {
+        const kota = document.getElementById('kotaSelector').value;
+        const waktuSholat = jadwalSholat[kota];
+
+        const tbody = document.getElementById('jadwalKota');
+        const tanggal = new Date().toLocaleDateString('id-ID', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        const baris = `
+            <tr>
+                <td>${tanggal}</td>
+                <td>${waktuSholat[0]}</td>
+                <td>${waktuSholat[1]}</td>
+                <td>${waktuSholat[2]}</td>
+                <td>${waktuSholat[3]}</td>
+                <td>${waktuSholat[4]}</td>
+                <td>${waktuSholat[5]}</td>
+                <td>${waktuSholat[6]}</td>
+                <td>${waktuSholat[7]}°</td>
+            </tr>
+        `;
+
+        tbody.innerHTML = baris;
+    }
+
+    // Set default jadwal untuk Jakarta saat halaman pertama kali dimuat
+    updateJadwal();
+</script>
+
+</body>
+</html>
