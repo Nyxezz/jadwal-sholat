@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #004e92, #000428);
+      background: linear-gradient(to bottom, #004e92, #000428);
       color: white;
       padding: 40px 20px;
       text-align: center;
@@ -33,24 +33,19 @@
     }
 
     .schedule-container {
-      overflow-x: auto;
-      margin-top: 30px;
-      padding-bottom: 10px;
-    }
-
-    .schedule {
       display: flex;
-      gap: 20px;
-      min-width: max-content;
-      justify-content: start;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
     }
 
     .card {
-      flex: 0 0 160px;
+      width: 280px;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid #00cfff;
       border-radius: 10px;
       padding: 20px;
+      margin-bottom: 20px;
       text-align: center;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
@@ -69,14 +64,6 @@
       font-size: 1.8em;
       font-weight: bold;
       color: #00eaff;
-    }
-
-    .schedule-container::-webkit-scrollbar {
-      height: 8px;
-    }
-    .schedule-container::-webkit-scrollbar-thumb {
-      background: #00cfff;
-      border-radius: 4px;
     }
   </style>
 </head>
@@ -97,9 +84,7 @@
 
   <div class="date" id="date">Tanggal</div>
 
-  <div class="schedule-container">
-    <div class="schedule" id="schedule"></div>
-  </div>
+  <div class="schedule-container" id="schedule"></div>
 
   <script>
     function formatDate(date) {
