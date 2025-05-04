@@ -86,6 +86,7 @@
   <label for="city">Pilih Kota:</label>
   <select id="city" onchange="loadPrayerTimes()">
     <option value="Jakarta">Jakarta</option>
+    <option value="Tangerang">Tangerang</option>
     <option value="Bandung">Bandung</option>
     <option value="Surabaya">Surabaya</option>
     <option value="Yogyakarta">Yogyakarta</option>
@@ -112,7 +113,7 @@
 
     function loadPrayerTimes() {
       const city = document.getElementById('city').value;
-      const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Indonesia&method=2`;
+      const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=Indonesia&method=2`;
 
       fetch(apiUrl)
         .then(response => response.json())
@@ -129,7 +130,7 @@
 
           const scheduleDiv = document.getElementById('schedule');
           const dateDiv = document.getElementById('date');
-          
+
           scheduleDiv.innerHTML = '';
           prayers.forEach(prayer => {
             const card = `
@@ -150,7 +151,6 @@
         });
     }
 
-    // Load saat pertama kali
     loadPrayerTimes();
   </script>
 </body>
