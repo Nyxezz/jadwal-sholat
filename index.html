@@ -98,7 +98,7 @@
 
     function loadPrayerTimes() {
       const city = document.getElementById('city').value;
-      const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=Indonesia&method=2`;
+      const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Indonesia&method=11`;
 
       fetch(apiUrl)
         .then(response => response.json())
